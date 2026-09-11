@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Точка зрения — журнал о дизайне, IT и современных профессиях.">
+  <meta name="theme-color" content="#3157f6">
+  <title>Журнал — Точка зрения</title>
+
+  <link rel="preload" href="assets/figma/Montserrat.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header class="header wrap">
+    <a class="brand" href="#top">Точка зрения</a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="navigation"
+      aria-label="Открыть меню"
+    >☰</button>
+
+    <nav id="navigation" aria-label="Основная навигация">
+      <a class="active" href="#journal" aria-current="page">Журнал</a>
+      <a href="#" data-unavailable>Все курсы</a>
+      <a href="#" data-unavailable>Бесплатно</a>
+      <a href="#" data-unavailable>Дизайн-библиотека</a>
+      <a href="#" data-unavailable>О школе</a>
+    </nav>
+
+    <button
+      class="login"
+      id="open-login"
+      type="button"
+      aria-haspopup="dialog"
+      aria-controls="login-dialog"
+    >Войти</button>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <h1 id="hero-heading">Журнал о дизайне, IT и современных профессиях.</h1>
+        <p>
+          Делимся экспертизой, историями<br>
+          и&nbsp;практическими материалами<br>
+          о&nbsp;профессиях, которые актуальны сегодня.
+        </p>
+      </div>
+
+      <div class="cover" aria-hidden="true">
+        <img src="assets/figma/poster.png" alt="" width="558" height="606">
+      </div>
+    </section>
+
+    <section id="journal" class="journal wrap" aria-label="Статьи журнала">
+      <div class="filters" aria-label="Категории статей"></div>
+      <div class="articles" id="articles"></div>
+      <p class="empty" hidden>В этой категории пока нет статей. Попробуйте другую.</p>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      UI/UX <i>•</i> ГРАФИЧЕСКИЙ ДИЗАЙН <i>•</i>
+      МОУШЕН-ДИЗАЙН <i>•</i> CG <i>•</i> ИДЕИ <i>•</i>
+      ТИПОГРАФИКА <i>•</i> ДИЗАЙН-СИСТЕМЫ <i>•</i>
+      EDITORIAL <i>•</i> ВИЗУАЛЬНАЯ КУЛЬТУРА <i>•</i> ВИДЕО И КИНО
+    </div>
+
+    <section class="editors wrap" id="editors">
+      <h2>Выбор редакции</h2>
+      <div class="editor-grid" id="editor-grid"></div>
+    </section>
+
+    <section class="today" aria-labelledby="today-heading">
+      <div class="wrap">
+        <h2 id="today-heading">Дизайн сегодня</h2>
+      </div>
+
+      <div
+        class="carousel"
+        id="carousel"
+        tabindex="0"
+        aria-label="Карточки о дизайне"
+      ></div>
+
+      <div class="carousel-controls">
+        <button id="previous" type="button" aria-label="Предыдущие карточки">
+          <img src="assets/figma/arrow-left.png" width="44" height="44" alt="">
+        </button>
+        <button id="next" type="button" aria-label="Следующие карточки">
+          <img src="assets/figma/arrow-right.png" width="44" height="44" alt="">
+        </button>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="wrap newsletter-inner">
+        <h2>ЛУЧШЕЕ О ДИЗАЙНЕ<br>— ПРЯМО В ПОЧТЕ</h2>
+
+        <form id="subscribe">
+          <label class="sr-only" for="email">Email</label>
+          <div class="email-field">
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Email"
+              autocomplete="email"
+              required
+            >
+            <button type="submit">Подписаться</button>
+          </div>
+          <p id="subscribe-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-columns wrap">
+      <div>
+        <h3>Навигация</h3>
+        <a href="#" data-unavailable>Дизайн-библиотека</a>
+        <a href="#" data-unavailable>Бесплатно</a>
+        <a href="#" data-unavailable>Все курсы</a>
+        <a href="#" data-unavailable>О школе</a>
+        <a href="#journal">Журнал</a>
+      </div>
+
+      <div>
+        <h3>Соц-сети</h3>
+        <a href="#" data-unavailable>Telegram</a>
+        <a href="#" data-unavailable>Behance</a>
+        <a href="#" data-unavailable>YouTube</a>
+        <a href="#" data-unavailable>VK</a>
+      </div>
+
+      <div>
+        <h3>Контакты</h3>
+        <a href="#" data-unavailable>Предложить материал</a>
+        <a href="#" data-unavailable>Для сотрудничества</a>
+        <a href="#" data-unavailable>Стать автором</a>
+        <a href="#" data-unavailable>Написать нам</a>
+      </div>
+    </div>
+
+    <div class="footer-wordmark" aria-label="Точка зрения">ТОЧКА ЗРЕНИЯ</div>
+  </footer>
+
+  <dialog id="login-dialog" aria-labelledby="login-title">
+    <form class="login-form" id="login-form" method="dialog">
+      <h2 id="login-title">Вход в аккаунт</h2>
+
+      <label for="login-identity">Email или логин</label>
+      <input
+        id="login-identity"
+        name="identity"
+        type="text"
+        placeholder="Введите email или логин"
+        autocomplete="username"
+        required
+      >
+
+      <label for="login-password">Пароль</label>
+      <input
+        id="login-password"
+        name="password"
+        type="password"
+        placeholder="Введите пароль"
+        autocomplete="current-password"
+        required
+      >
+
+      <div class="login-options">
+        <label class="remember-option" for="remember-login">
+          <input id="remember-login" name="remember" type="checkbox">
+          <span>Запомнить меня</span>
+        </label>
+        <button class="forgot-password" type="button">Забыли пароль?</button>
+      </div>
+
+      <button class="login-submit" type="submit">Войти</button>
+      <p class="login-status" id="login-status" role="status"></p>
+    </form>
+  </dialog>
+
+  <dialog id="article-dialog">
+    <button class="dialog-close" type="button" aria-label="Закрыть">×</button>
+    <div id="dialog-content"></div>
+  </dialog>
+
+  <button class="back-to-top" type="button" aria-label="Наверх" title="Наверх" hidden>
+    <span class="up-arrow" aria-hidden="true"></span>
+  </button>
+  <div class="toast" role="status" hidden></div>
+</body>
+</html>
