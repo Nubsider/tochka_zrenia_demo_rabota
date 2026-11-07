@@ -9,14 +9,12 @@
 .article-cover {
   display: block;
   width: 100%;
+  aspect-ratio: 645 / 354;
+  position: relative;
   overflow: hidden;
   border: 1px solid #d9dce1;
   border-radius: 30px;
   transition: border-color 200ms ease;
-}
-
-.articles .article-cover .article-image {
-  border: 0;
 }
 
 .article-image,
@@ -173,6 +171,12 @@ body {
   --ink:#151515;
   --muted:#666;
   --blue:#3157f6;
+  --blue-hover:#294ddf;
+  --blue-active:#2648d1;
+  --subtle:#e9edff;
+  --inverse:#fefefe;
+  --tag-ink:#151515cc;
+  --chip-shadow:0 2px 4px #1a1a1a0f;
   --surface:#eceef2;
   --line:#d9dce1;
   font-family:Montserrat,Arial,sans-serif;
@@ -323,7 +327,7 @@ img {
   font-size:28px;
   line-height:1.21;
   color:var(--muted);
-  margin-top:37px;
+  margin-top:34px;
   max-width:654px
 }
 
@@ -348,7 +352,7 @@ img {
   flex-wrap:wrap;
   align-content:start;
   gap:14px;
-  max-width:1307px;
+  max-width:100%;
   margin-bottom:60px
 }
 
@@ -356,23 +360,19 @@ img {
   border:1px solid var(--line);
   border-radius:300px;
   background:var(--surface);
-  padding:11px 13px;
+  padding:12px 14px;
   font-size:18px;
-  line-height:14px;
+  line-height:13px;
   letter-spacing:.01em;
   white-space:nowrap;
-  box-shadow:0 2px 2px #1a1a1a0f
+  box-shadow:var(--chip-shadow)
 }
 
 .chip.selected {
   background:var(--blue);
   border-color:var(--blue);
-  color:#fefefe;
+  color:var(--inverse);
   font-weight:600
-}
-
-.chip:nth-child(n+7):nth-child(-n+12) {
-  padding-inline:11px
 }
 
 .chip:hover {
@@ -381,6 +381,7 @@ img {
 
 .articles {
   display:grid;
+  align-items:start;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:56px 40px
 }
@@ -396,11 +397,27 @@ img {
 }
 
 .article-image {
+  position:absolute;
+  inset:0;
   width:100%;
-  aspect-ratio:645/354;
-  height:auto;
-  object-fit:cover;
-  border-radius:30px
+  height:100%;
+  object-fit:cover
+}
+
+/* Original image-fill crops from Desktop - 1. */
+.article[data-image=interface] .article-image,
+.article[data-image=three-d] .article-image {
+  height:136.65%;
+  top:-4.4%;
+  object-fit:fill
+}
+
+.article[data-image=interface] .article-image {
+  left:.15%
+}
+
+.article[data-image=three-d] .article-image {
+  top:-4.19%
 }
 
 .metadata {
@@ -425,17 +442,18 @@ img {
   justify-content:center;
   border:1px solid var(--line);
   border-radius:300px;
-  padding:9px 11px;
+  padding:10px 12px;
   background:var(--surface);
   font-size:16px;
-  line-height:13px;
-  color:#151515cc;
+  line-height:11px;
+  color:var(--tag-ink);
   white-space:nowrap;
-  box-shadow:0 2px 2px #1a1a1a0f
+  box-shadow:var(--chip-shadow)
 }
 
 .author {
   font-size:18px;
+  color:var(--muted);
   white-space:nowrap
 }
 
@@ -443,7 +461,7 @@ img {
   font-size:20px;
   font-weight:600;
   line-height:normal;
-  margin-bottom:16px
+  margin-bottom:22px
 }
 
 .article p {
@@ -459,7 +477,7 @@ img {
 }
 
 .ticker {
-  margin-top:68px;
+  margin-top:73px;
   height:61px;
   display:flex;
   align-items:center;
@@ -479,7 +497,7 @@ img {
 }
 
 .editors {
-  padding-top:68px
+  padding-top:83px
 }
 
 /* Выбор редакции */
@@ -494,17 +512,15 @@ h2 {
 .editor-grid {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:24px
+  width:calc(100% + 2px);
+  gap:25.5px
 }
 
 .editor-column {
   display:flex;
   flex-direction:column;
-  gap:24px
-}
-
-.editor-column:nth-child(2) {
-  gap:16px
+  min-width:0;
+  gap:25px
 }
 
 .small-card {
@@ -522,94 +538,84 @@ h2 {
   overflow:hidden
 }
 
-.small-card img {
+.small-card-media {
+  display:block;
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:11px;
+  flex:none
+}
+
+.small-card-media img {
   width:100%;
-  object-fit:cover;
-  border-radius:11px
+  height:100%;
+  object-fit:cover
+}
+
+.small-card-meta {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px
 }
 
 .small-card .badge {
-  position:absolute;
-  right:19px;
-  top:19px;
-  padding:7px 13px;
-  background:var(--blue);
-  border:1px solid var(--blue);
-  border-radius:300px;
-  font-size:18px;
-  font-weight:600;
-  line-height:14px;
-  color:#fefefe;
-  white-space:nowrap;
-  box-shadow:0 2px 2px #1a1a1a0f
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  align-self:flex-start;
+  padding:10px 12px;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:1000px;
+  font-size:16px;
+  font-weight:500;
+  line-height:11px;
+  color:var(--tag-ink);
+  white-space:nowrap
+}
+
+.small-card .author {
+  font-size:16px;
+  line-height:11px
 }
 
 .small-card h3 {
   font-size:16px;
   font-weight:600;
-  line-height:normal;
+  line-height:20px;
   margin-top:16px;
-  margin-bottom:10px
+  margin-bottom:12px
 }
 
 .small-card p {
   font-size:14px;
   font-weight:500;
-  line-height:normal;
+  line-height:17px;
   color:var(--muted)
 }
 
-.small-card[data-image=identity] {
-  min-height:420px
-}
-
-.small-card[data-image=identity] img {
-  aspect-ratio:387/279
-}
-
-.small-card[data-image=system] {
-  min-height:300px
-}
-
-.small-card[data-image=system] img {
-  aspect-ratio:387/180
-}
-
-.small-card[data-image=decor] {
-  min-height:260px
-}
-
-.small-card[data-image=decor] img {
-  aspect-ratio:387/139
-}
-
-.small-card[data-image=motion] {
-  min-height:400px
-}
-
-.small-card[data-image=motion] img {
-  aspect-ratio:387/279
-}
-
-.small-card[data-image=type] {
-  min-height:340px
-}
-
-.small-card[data-image=type] img {
-  aspect-ratio:387/236
-}
-
-.small-card[data-image=defend] {
-  min-height:250px
-}
-
-.small-card[data-image=defend] img {
-  aspect-ratio:387/129
-}
+.editor-grid .small-card { --media-ratio:387 / 279 }
+.editor-grid .small-card[data-image=identity] { min-height:471px }
+.editor-grid .small-card[data-image=system] { min-height:352px; --media-ratio:387 / 180 }
+.editor-grid .small-card[data-image=decor] { min-height:311px; --media-ratio:387 / 139 }
+.editor-grid .small-card[data-image=motion] { min-height:451px }
+.editor-grid .small-card[data-image=type] { min-height:391px; --media-ratio:387 / 236 }
+.editor-grid .small-card[data-image=defend] { min-height:301px; --media-ratio:387 / 129 }
+.editor-grid .small-card-media { aspect-ratio:var(--media-ratio) }
+.editor-grid .small-card[data-image=type] .small-card-media { border-radius:15px 40px 15px 15px }
+.editor-grid .small-card[data-image=identity] .small-card-media { border-top-right-radius:18px }
+.editor-grid .small-card[data-image=system] .small-card-media { border-top-right-radius:19px }
+.editor-grid .small-card[data-image=type] img,
+.editor-grid .small-card[data-image=decor] img,
+.editor-grid .small-card[data-image=system] img { object-position:top }
 
 .today {
-  margin-top:92px;
-  padding-bottom:84px;
+  margin-top:74px;
+  padding-bottom:107px;
   overflow:hidden
 }
 
@@ -632,52 +638,75 @@ h2 {
   flex:0 0 360px;
   scroll-snap-align:center;
   border-radius:25px;
-  padding:5px 5px 23px;
-  min-height:331px
+  padding:14px 14px 24px;
+  min-height:380px
+}
+
+.carousel .small-card-media {
+  aspect-ratio:330 / 222;
+  border:0;
+  border-radius:19px;
+  margin-bottom:20px
 }
 
 .carousel .small-card img {
-  height:230px;
-  border-radius:19px
+  position:absolute;
+  max-width:none;
+  width:100%;
+  height:113.48%;
+  top:-2.6%;
+  object-fit:fill
 }
 
-/* Обложку с буквами показываем целиком. */
-.carousel .small-card[data-image="kinetic"] img {
-  object-fit: contain;
-  transform: none;
+.carousel .small-card[data-image=motion-ui] img {
+  width:117.43%;
+  height:100%;
+  left:-12.13%;
+  top:-.22%
 }
 
-.carousel .badge {
-  top:14px;
-  right:14px;
-  padding:11px 13px
+.carousel .small-card[data-image=variable] img { top:-2.19% }
+.carousel .small-card[data-image=kinetic] img {
+  width:99.14%;
+  height:100%;
+  left:.43%;
+  top:0
 }
 
-.carousel h3 {
-  margin:20px 7px 14px
+.carousel .small-card-meta {
+  order:1;
+  margin-top:14px
 }
 
-.carousel p {
-  margin-inline:7px
-}
+.carousel .badge { font-size:14px; line-height:10px }
+.carousel h3 { margin:0 0 14px; line-height:normal }
+.carousel p { margin:0 }
 
 .carousel-controls {
   display:flex;
+  align-items:center;
   justify-content:center;
   gap:14px;
-  margin-top:20px
+  margin-top:45px
 }
 
 .carousel-controls button {
-  border-radius:50%;
+  display:grid;
+  place-items:center;
+  flex:0 0 44px;
   width:44px;
   height:44px;
-  background:var(--blue);
-  color:#fefefe;
-  font-size:30px;
-  line-height:1;
-  font-weight:400
+  padding:0;
+  background:transparent;
+  border-radius:50%;
+  appearance:none
 }
+
+.carousel-controls img { max-width:none; pointer-events:none }
+#next img { transform:rotate(180deg) }
+.carousel-controls button:hover img,
+.carousel-controls button:focus-visible img { content:url('assets/figma/arrow-hover.svg') }
+.carousel-controls button:active img { content:url('assets/figma/arrow-pressed.svg') }
 
 .newsletter {
   border-block:1px solid var(--line);
@@ -732,7 +761,7 @@ h2 {
   padding:10px 16px;
   border-radius:22px;
   background:var(--blue);
-  color:#fefefe;
+  color:var(--inverse);
   font-size:24px;
   letter-spacing:.02em
 }
@@ -750,13 +779,14 @@ h2 {
 }
 
 footer {
-  height:525px;
+  height:520px;
   overflow:hidden;
   position:relative
 }
 
 /* Подвал */
 .footer-columns {
+  --footer-link-step:33px;
   display:grid;
   grid-template-columns:596px 461px 1fr;
   gap:0;
@@ -778,10 +808,18 @@ footer {
 .footer-columns a {
   display:block;
   font-size:22px;
-  line-height:33px;
+  line-height:var(--footer-link-step);
+  text-box-trim:trim-both;
+  text-box-edge:cap alphabetic;
   color:var(--muted);
   white-space:nowrap
 }
+
+.footer-columns a+a {
+  margin-top:calc(var(--footer-link-step) - .7em)
+}
+
+.footer-columns>div:not(:first-child) { padding-top:2px }
 
 .footer-columns a:hover,.header nav a:hover {
   color:var(--blue)
@@ -874,22 +912,24 @@ dialog::backdrop {
 }
 
 @media(max-width:1350px) {
+  .header { gap:24px }
+
   .header nav {
-    gap:30px;
-    font-size:18px
+    gap:16px;
+    font-size:16px
   }
 
   .brand {
-    font-size:22px
+    font-size:20px
   }
 
   .login {
-    margin-left:30px;
-    font-size:18px
+    margin-left:0;
+    font-size:16px
   }
 
   .hero {
-    grid-template-columns:1.1fr .9fr;
+    grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
     gap:40px;
     height:auto;
     min-height:530px
@@ -908,6 +948,11 @@ dialog::backdrop {
   .hero p {
     font-size:24px
   }
+
+  .hero p br { display:none }
+
+  .editor-grid { width:100% }
+  .editor-grid .small-card[data-image] { min-height:0 }
 
   .footer-columns {
     grid-template-columns:1.3fr 1fr .8fr
@@ -940,11 +985,6 @@ dialog::backdrop {
 
   .small-card {
     padding:16px
-  }
-
-  .small-card .badge {
-    right:16px;
-    top:16px
   }
 
   .small-card h3 {
@@ -987,17 +1027,17 @@ dialog::backdrop {
   }
 
   .header nav {
-    gap:20px;
-    font-size:14px
+    gap:12px;
+    font-size:13px
   }
 
   .brand {
-    font-size:18px
+    font-size:16px
   }
 
   .login {
-    font-size:14px;
-    margin-left:22px;
+    font-size:13px;
+    margin-left:14px;
     padding:8px 12px
   }
 
@@ -1056,7 +1096,7 @@ dialog::backdrop {
     padding:7px 9px
   }
 
-  .article-image {
+  .article-cover {
     border-radius:22px
   }
 
@@ -1076,6 +1116,7 @@ dialog::backdrop {
   }
 
   .editor-grid {
+    width:100%;
     gap:16px
   }
 
@@ -1089,12 +1130,12 @@ dialog::backdrop {
 
   .small-card .badge {
     font-size:12px;
-    padding:6px 9px;
-    right:12px;
-    top:12px
+    padding:8px 9px
   }
 
-  .editor-grid .small-card {
+  .small-card .author { font-size:12px }
+
+  .editor-grid .small-card[data-image] {
     min-height:0;
     padding-bottom:22px
   }
@@ -1121,10 +1162,6 @@ dialog::backdrop {
   .carousel .small-card {
     flex-basis:310px;
     min-height:310px
-  }
-
-  .carousel .small-card img {
-    height:205px
   }
 
   .carousel .badge {
@@ -1177,7 +1214,7 @@ dialog::backdrop {
 
 }
 
-@media(max-width:760px) {
+@media(max-width:900px) {
   .wrap {
     width:calc(100% - 40px)
   }
@@ -1270,10 +1307,6 @@ dialog::backdrop {
     padding:8px 10px
   }
 
-  .chip:nth-child(n+7):nth-child(-n+12) {
-    padding-inline:10px
-  }
-
   .articles {
     grid-template-columns:1fr;
     gap:35px
@@ -1333,10 +1366,10 @@ dialog::backdrop {
 
   .small-card .badge {
     font-size:14px;
-    right:16px;
-    top:16px;
-    padding:7px 11px
+    padding:9px 11px
   }
+
+  .small-card .author { font-size:13px }
 
   .small-card h3 {
     font-size:17px;
@@ -1363,17 +1396,8 @@ dialog::backdrop {
     max-width:360px
   }
 
-  .carousel .small-card img {
-    height:210px
-  }
-
   .carousel-controls {
     margin-top:20px
-  }
-
-  .carousel-controls button {
-    width:40px;
-    height:40px
   }
 
   .newsletter {
@@ -1409,6 +1433,7 @@ dialog::backdrop {
   }
 
   .footer-columns {
+    --footer-link-step:28px;
     grid-template-columns:1fr 1fr;
     gap:35px 20px;
     padding-top:36px
@@ -1421,7 +1446,7 @@ dialog::backdrop {
 
   .footer-columns a {
     font-size:14px;
-    line-height:28px
+    line-height:var(--footer-link-step)
   }
 
   .footer-columns div:last-child {
@@ -1478,19 +1503,17 @@ dialog::backdrop {
   flex-wrap:wrap
 }
 
+.filter-row:nth-child(2) .chip:not(:last-child) {
+  padding-inline:12px
+}
+
 .chip {
   height:39px
 }
 
-.chip:nth-child(n+7):nth-child(-n+12) {
-  padding-inline:13px
-}
-
-.filter-row:nth-child(2) .chip:not(:last-child) {
-  padding-inline:11px
-}
-
 @media(min-width:1351px) {
+  .editors>h2,.today h2 { min-height:34px }
+
   .wrap {
     width:min(1330px,calc(100vw - 110px))
   }
@@ -1539,41 +1562,6 @@ dialog::backdrop {
 
 }
 
-/* Кнопки со стрелками */
-.carousel-controls {
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:14px;
-  margin-top:20px
-}
-
-.carousel-controls button {
-  display:grid;
-  place-items:center;
-  flex:0 0 44px;
-  width:44px;
-  height:44px;
-  min-width:44px;
-  padding:0;
-  border:0;
-  line-height:0;
-  background:transparent;
-  overflow:hidden;
-  border-radius:50%;
-  appearance:none
-}
-
-.carousel-controls button img {
-  display:block;
-  width:44px;
-  height:44px;
-  max-width:none;
-  object-fit:contain;
-  pointer-events:none
-}
-
 .header .login {
   transition:background-color .18s ease,color .18s ease,border-color .18s ease
 }
@@ -1581,17 +1569,7 @@ dialog::backdrop {
 .header .login:hover,.header .login:focus-visible {
   background-color:var(--blue);
   border-color:var(--blue);
-  color:#fefefe
-}
-
-/* Рамка у картинок статей */
-.articles .article-image {
-  border:1px solid #d9dce1;
-  border-radius:30px;
-}
-
-footer {
-  background-color:#f7f8fa
+  color:var(--inverse)
 }
 
 /* Бегущая строка без разрыва */
@@ -1793,8 +1771,11 @@ footer {
 }
 
 .login-submit:hover {
-  background:#2449e7
+  background:var(--blue-hover)
 }
+
+.email-field button:hover { background:var(--blue-hover) }
+.email-field button:active,.login-submit:active { background:var(--blue-active) }
 
 .login-submit:active {
   transform:translateY(1px)
@@ -1855,4 +1836,18 @@ body:has(#login-dialog[open]) {
     animation:none
   }
 
+}
+
+@media(max-width:360px) {
+  .wrap { width:calc(100% - 32px) }
+  .header { gap:10px }
+  .brand { font-size:16px }
+  .hero p br { display:none }
+  .tags { flex-wrap:wrap }
+  .tag { white-space:normal; line-height:1.2 }
+  .newsletter h2 { font-size:23px }
+  .login-options { flex-wrap:wrap; gap:12px }
+  #login-dialog { height:auto; min-height:428px }
+  .footer-columns { grid-template-columns:1fr }
+  .footer-columns a { white-space:normal }
 }

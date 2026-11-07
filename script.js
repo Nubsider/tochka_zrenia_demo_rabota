@@ -45,28 +45,28 @@ const articles = [
   {
     image: 'portfolio',
     title: 'Как собрать сильное портфолио, если работ пока мало',
-    description: 'Что показывать в портфолио, как оформить кейсы и чем заменить слабые работы, если опыта еще мало.',
+    description: 'Что показывать в портфолио, как оформить кейсы и чем заменить слабые работы, если опыта еще мало.',
     tags: ['Инструкции', 'Графический дизайн'],
     author: 'Мария Ковалева'
   },
   {
     image: 'references',
     title: 'Насмотренность без копирования: как правильно работать с референсами',
-    description: 'Как анализировать чужие работы, находить сильные приемы и использовать референсы, не превращая дизайн в копирование.',
+    description: 'Как анализировать чужие работы, находить сильные приемы и использовать референсы, не превращая дизайн в копирование.',
     tags: ['Инструкции', 'Графический дизайн'],
     author: 'Алексей Морозов'
   },
   {
     image: 'interface',
     title: 'Что отличает сильный интерфейс от посредственного',
-    description: 'Иерархия, отступы, контраст и сценарии - основные вещи, которые делают интерфейс понятным и цельным.',
+    description: 'Иерархия, отступы, контраст и сценарии — основные вещи, которые делают интерфейс понятным и цельным.',
     tags: ['UX/UI-дизайн', 'Инструкции'],
     author: 'Ирина Соколова'
   },
   {
     image: 'three-d',
     title: 'Как начать в 3D и не утонуть в софте',
-    description: 'С чего начать путь в 3D, какой софт выбрать первым и как не распыляться между Blender, Cinema 4D и Houdini.',
+    description: 'С чего начать путь в 3D, какой софт выбрать первым и как не распыляться между Blender, Cinema 4D и Houdini.',
     tags: ['Инструкции', 'Моушен-дизайн и CG'],
     author: 'Дмитрий Орлов'
   }
@@ -76,43 +76,49 @@ const editorialCards = [
   [
     {
       image: 'identity',
+      author: 'Анна Лебедева',
       title: 'Как дизайнеру найти собственный визуальный язык',
-      description: 'Разбираемся, как анализировать референсы, отбирать сильные приемы и постепенно формировать узнаваемый стиль.',
+      description: 'Разбираемся, как анализировать референсы, отбирать сильные приемы и постепенно формировать узнаваемый стиль.',
       category: 'Графический дизайн'
     },
     {
-      image: 'system',
-      title: 'От референсов к системе',
-      description: 'Как превратить разрозненные идеи в цельную систему из цвета, типографики, композиции и визуальных приемов.',
-      category: 'Инструкции'
+      image: 'decor',
+      author: 'Максим Воронов',
+      title: 'Почему сетка важнее декора',
+      description: 'Сетка помогает выстроить иерархию, сохранить ритм и сделать интерфейс цельным еще до работы с деталями.',
+      category: 'UX/UI-дизайн'
     }
   ],
   [
     {
-      image: 'decor',
-      title: 'Почему сетка важнее декора',
-      description: 'Сетка помогает выстроить иерархию, сохранить ритм и сделать интерфейс цельным еще до работы с деталями.',
-      category: 'UX/UI-дизайн'
+      image: 'defend',
+      author: 'Елена Власова',
+      title: 'Как защищать дизайн-решения',
+      description: 'Аргументы, цели и данные помогают обсуждать дизайн без споров на уровне «нравится — не нравится».',
+      category: 'Менеджмент'
     },
     {
       image: 'motion',
+      author: 'Кирилл Нестеров',
       title: 'Как motion помогает понимать интерфейс',
-      description: 'Анимация показывает связь элементов, смену состояний и направление действия без лишних подсказок.',
+      description: 'Анимация показывает связь элементов, смену состояний и направление действия без лишних подсказок.',
       category: 'Моушен-дизайн и CG'
     }
   ],
   [
     {
       image: 'type',
+      author: 'Ольга Миронова',
       title: '5 приемов сильной типографики',
-      description: 'Контраст, масштаб, интервалы, ритм и длина строки делают текст выразительнее.',
-      category: 'Абсолютные списки'
+      description: 'Контраст, масштаб, интервалы, ритм и длина строки делают текст выразительнее.',
+      category: 'Типографика'
     },
     {
-      image: 'defend',
-      title: 'Как защищать дизайн-решения',
-      description: 'Аргументы, цели и данные помогают обсуждать дизайн без споров на уровне «нравится - не нравится».',
-      category: 'Менеджмент'
+      image: 'system',
+      author: 'Никита Белов',
+      title: 'От референсов к системе',
+      description: 'Как превратить разрозненные идеи в цельную систему из цвета, типографики, композиции и визуальных приемов.',
+      category: 'Дизайн-системы'
     }
   ]
 ];
@@ -122,7 +128,7 @@ const todayCards = [
     image: 'ui',
     title: 'Интерфейс под пользователя',
     description: 'Generative UI меняет интерфейс под задачу и контекст.',
-    category: 'UX/UI'
+    category: 'UI/UX-дизайн'
   },
   {
     image: 'motion-ui',
@@ -140,7 +146,7 @@ const todayCards = [
     image: 'kinetic',
     title: 'Кинетическая типографика в кадре',
     description: 'Текст становится частью движения и визуального ритма.',
-    category: 'Видео и кино'
+    category: 'Кино и видео'
   }
 ];
 
@@ -199,10 +205,11 @@ function createArticleCard(article) {
   const card = document.createElement('article');
   const button = document.createElement('button');
   card.className = 'article';
+  card.dataset.image = article.image;
   button.className = 'article-link';
   button.innerHTML = `
     <span class="article-cover">
-      <img class="article-image" src="assets/figma/${article.image}.png" alt="${article.title}" width="644" height="350">
+      <img class="article-image" src="assets/figma/${article.image}.png" alt="${article.title}" width="645" height="354">
     </span>
     <div class="metadata">
       <span class="tags">${makeTags(article.tags)}</span>
@@ -247,8 +254,13 @@ function createSmallCard(cardInfo) {
   card.className = 'small-card';
   card.dataset.image = cardInfo.image;
   card.innerHTML = `
-    <img src="assets/figma/${cardInfo.image}.png" alt="" loading="lazy">
-    <span class="badge">${cardInfo.category}</span>
+    <span class="small-card-media">
+      <img src="assets/figma/${cardInfo.image}.png" alt="" loading="lazy">
+    </span>
+    <span class="small-card-meta">
+      <span class="badge">${cardInfo.category}</span>
+      ${cardInfo.author ? `<span class="author">${cardInfo.author}</span>` : ''}
+    </span>
     <h3>${cardInfo.title}</h3>
     <p>${cardInfo.description}</p>
   `;
